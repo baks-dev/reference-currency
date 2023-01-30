@@ -23,20 +23,18 @@
 
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
-
 use BaksDev\Reference\Money\Twig\MoneyExtension;
 
-return static function (ContainerConfigurator $configurator)
-{
-    $services = $configurator->services()
-      ->defaults()
-      ->autowire()
-      ->autoconfigure()
-    ;
+return static function(ContainerConfigurator $configurator) {
+	$services = $configurator->services()
+		->defaults()
+		->autowire()
+		->autoconfigure()
+	;
 	
-//    $services->set('money.type.twig.extension')
-//      ->class(MoneyExtension::class)
-//      ->tag('twig.extension');
+	//    $services->set('money.type.twig.extension')
+	//      ->class(MoneyExtension::class)
+	//      ->tag('twig.extension');
 	
 };
 

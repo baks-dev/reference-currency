@@ -26,55 +26,57 @@ namespace BaksDev\Reference\Currency\Type;
 /** Валюта */
 final class Currency
 {
-    
-    public const TYPE = 'currency_type';
-
-    private CurrencyEnum $currency;
-    
-
-    public function __construct(string|CurrencyEnum $currency = null)
-    {
-        if($currency === null)
-        {
-            $currency = CurrencyEnum::DEFAULT;
-        }
-        
-        $this->currency = $currency instanceof CurrencyEnum ? $currency : CurrencyEnum::from($currency);
-    }
-
-    public function __toString() : string
-    {
-        return $this->currency->value;
-    }
 	
-    public function getValue() : string
-    {
-        return $this->currency->value;
-    }
-    
-
-    public function getName() : string
-    {
-        return $this->currency->name;
-    }
-    
-
-    public function getCurrency() : CurrencyEnum
-    {
-        return $this->currency;
-    }
+	public const TYPE = 'currency_type';
 	
-
-    public static function cases() : array
-    {
-        $case = null;
-        
-        foreach(CurrencyEnum::cases() as $local)
-        {
-            $case[] = new self($local);
-        }
-        
-        return $case;
-    }
-
+	private CurrencyEnum $currency;
+	
+	
+	public function __construct(string|CurrencyEnum $currency = null)
+	{
+		if($currency === null)
+		{
+			$currency = CurrencyEnum::DEFAULT;
+		}
+		
+		$this->currency = $currency instanceof CurrencyEnum ? $currency : CurrencyEnum::from($currency);
+	}
+	
+	
+	public function __toString() : string
+	{
+		return $this->currency->value;
+	}
+	
+	
+	public function getValue() : string
+	{
+		return $this->currency->value;
+	}
+	
+	
+	public function getName() : string
+	{
+		return $this->currency->name;
+	}
+	
+	
+	public function getCurrency() : CurrencyEnum
+	{
+		return $this->currency;
+	}
+	
+	
+	public static function cases() : array
+	{
+		$case = null;
+		
+		foreach(CurrencyEnum::cases() as $local)
+		{
+			$case[] = new self($local);
+		}
+		
+		return $case;
+	}
+	
 }

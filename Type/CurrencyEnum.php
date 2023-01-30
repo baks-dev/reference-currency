@@ -23,29 +23,30 @@
 
 namespace BaksDev\Reference\Currency\Type;
 
-enum CurrencyEnum: string
+enum CurrencyEnum : string
 {
-    public const DEFAULT = 'rur';
-    
-    case RUR = 'rur'; // Российский рубль
-    case USD = 'usd'; // Доллар США
-    case EUR = 'eur'; // Евро
-    case AMD = 'amd'; // Армянский драм
-    case KZT = 'kzt'; // Казахский тенге
-    case KGS = 'kgs'; // Киргизский сом
-    case BYN = 'byn'; // Белорусский рубль
-    
-    public static function CurrencyCode(int $code) : CurrencyEnum
-    {
-        return match ($code)
-        {
-            643 => self::RUR, // - Российский рубль
-            840 => self::USD, // Доллар США
-            51 => self::AMD, // Армянский драм
-            398 => self::KZT, // Казахский тенге
-            417 => self::KGS, // Киргизский сом
-            933, 974 => self::BYN, // Белорусский рубль
-        };
-    }
-
+	public const DEFAULT = 'rur';
+	
+	case RUR = 'rur'; // Российский рубль
+	case USD = 'usd'; // Доллар США
+	case EUR = 'eur'; // Евро
+	case AMD = 'amd'; // Армянский драм
+	case KZT = 'kzt'; // Казахский тенге
+	case KGS = 'kgs'; // Киргизский сом
+	case BYN = 'byn'; // Белорусский рубль
+	
+	
+	public static function CurrencyCode(int $code) : CurrencyEnum
+	{
+		return match ($code)
+		{
+			643 => self::RUR, // - Российский рубль
+			840 => self::USD, // Доллар США
+			51 => self::AMD, // Армянский драм
+			398 => self::KZT, // Казахский тенге
+			417 => self::KGS, // Киргизский сом
+			933, 974 => self::BYN, // Белорусский рубль
+		};
+	}
+	
 }

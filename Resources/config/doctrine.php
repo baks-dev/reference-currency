@@ -28,7 +28,6 @@ use BaksDev\Reference\Currency\Type\Currency;
 use BaksDev\Reference\Currency\Type\CurrencyType;
 use Symfony\Config\DoctrineConfig;
 
-return static function (DoctrineConfig $doctrine)
-{
+return static function(DoctrineConfig $doctrine) {
 	$doctrine->dbal()->type(Currency::TYPE)->class(CurrencyType::class);
 };

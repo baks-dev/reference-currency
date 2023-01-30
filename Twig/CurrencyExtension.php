@@ -30,17 +30,19 @@ use Twig\TwigFunction;
 /** Класс конвертирует число из одной валюты в другую */
 final class CurrencyExtension extends AbstractExtension
 {
-	public function getFunctions(): array
+	public function getFunctions() : array
 	{
 		return [
 			new TwigFunction('currency', [$this, 'money'], ['needs_environment' => true]),
 		];
 	}
 	
-	public function money(Environment $twig, string $money, string $from, string $to): string
-    {
+	
+	public function money(Environment $twig, string $money, string $from, string $to) : string
+	{
 		/** TODO: конвертируем валюту */
 		
-        return ($money * 1 / 100);
+		return ($money * 1 / 100);
 	}
+	
 }

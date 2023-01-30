@@ -28,30 +28,35 @@ use Doctrine\DBAL\Types\StringType;
 
 final class CurrencyType extends StringType
 {
-    public function convertToDatabaseValue($value, AbstractPlatform $platform) : mixed
-    {
-        return $value instanceof Currency ? $value->getValue() : (new Currency($value))->getValue();
-    }
-    
-    public function convertToPHPValue($value, AbstractPlatform $platform) : mixed
-    {
-        return $value ? new Currency($value) : null;
-    }
-    
-    public function getName() : string
-    {
-        return Currency::TYPE;
-    }
-    
-    public function requiresSQLCommentHint(AbstractPlatform $platform) : bool
-    {
-        return true;
-    }
-    
-    public function getSQLDeclaration(array $column, AbstractPlatform $platform) : string
-    {
-        $column['length'] = 3;
-        
-        return $platform->getVarcharTypeDeclarationSQL($column);
-    }
+	public function convertToDatabaseValue($value, AbstractPlatform $platform) : mixed
+	{
+		return $value instanceof Currency ? $value->getValue() : (new Currency($value))->getValue();
+	}
+	
+	
+	public function convertToPHPValue($value, AbstractPlatform $platform) : mixed
+	{
+		return $value ? new Currency($value) : null;
+	}
+	
+	
+	public function getName() : string
+	{
+		return Currency::TYPE;
+	}
+	
+	
+	public function requiresSQLCommentHint(AbstractPlatform $platform) : bool
+	{
+		return true;
+	}
+	
+	
+	public function getSQLDeclaration(array $column, AbstractPlatform $platform) : string
+	{
+		$column['length'] = 3;
+		
+		return $platform->getVarcharTypeDeclarationSQL($column);
+	}
+	
 }
