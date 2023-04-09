@@ -33,14 +33,19 @@ final class CurrencyExtension extends AbstractExtension
 	public function getFunctions() : array
 	{
 		return [
-			new TwigFunction('currency', [$this, 'money'], ['needs_environment' => true]),
+			new TwigFunction('currency', [$this, 'currency'], ['needs_environment' => true]),
 		];
 	}
 	
 	
-	public function money(Environment $twig, string $money, string $from, string $to) : string
+	public function currency(Environment $twig, string $money, string $from = 'RUR', string $to = 'RUR') : string
 	{
 		/** TODO: конвертируем валюту */
+		
+		if($from === $to )
+		{
+		
+		}
 		
 		return ($money * 1 / 100);
 	}
