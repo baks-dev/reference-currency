@@ -32,11 +32,6 @@
       "BaksDev\\Reference\\Currency\\": ""
     }
   },
-  "autoload-dev": {
-    "psr-4": {
-      "BaksDev\\Reference\\Currency\\Tests\\": "Tests/"
-    }
-  },
   "config": {
     "sort-packages": true,
     "allow-plugins": {
