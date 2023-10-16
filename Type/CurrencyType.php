@@ -28,19 +28,19 @@ use Doctrine\DBAL\Types\StringType;
 
 final class CurrencyType extends StringType
 {
-	public function convertToDatabaseValue($value, AbstractPlatform $platform) : mixed
+	public function convertToDatabaseValue($value, AbstractPlatform $platform): mixed
 	{
 		return $value instanceof Currency ? $value->getValue() : (new Currency($value))->getValue();
 	}
 	
 	
-	public function convertToPHPValue($value, AbstractPlatform $platform) : mixed
+	public function convertToPHPValue($value, AbstractPlatform $platform): mixed
 	{
 		return $value ? new Currency($value) : null;
 	}
 	
 	
-	public function getName() : string
+	public function getName(): string
 	{
 		return Currency::TYPE;
 	}
@@ -52,7 +52,7 @@ final class CurrencyType extends StringType
 	}
 	
 	
-	public function getSQLDeclaration(array $column, AbstractPlatform $platform) : string
+	public function getSQLDeclaration(array $column, AbstractPlatform $platform): string
 	{
 		$column['length'] = 3;
 		

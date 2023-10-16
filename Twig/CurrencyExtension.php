@@ -38,7 +38,7 @@ final class CurrencyExtension extends AbstractExtension
 	}
 	
 	
-	public function currency(Environment $twig, string $money, string $from = 'RUR', string $to = 'RUR') : string
+	public function currency(Environment $twig, string $money, string $from = 'RUR', string $to = 'RUR'): string
 	{
 		/** TODO: конвертируем валюту */
 		
