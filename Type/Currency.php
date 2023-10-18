@@ -23,60 +23,107 @@
 
 namespace BaksDev\Reference\Currency\Type;
 
+use BaksDev\Reference\Currency\Type\Currencies\Collection\CurrencyInterface;
+use BaksDev\Reference\Currency\Type\Currencies\RUR;
+use InvalidArgumentException;
+
 /** Валюта */
 final class Currency
 {
-	
 	public const TYPE = 'currency_type';
 	
-	private CurrencyEnum $currency;
-	
-	
-	public function __construct(string|CurrencyEnum $currency = null)
+	private CurrencyInterface $currency;
+
+	public function __construct(CurrencyInterface|self|string|null $currency = null)
 	{
-		if($currency === null)
-		{
-			$currency = CurrencyEnum::DEFAULT;
-		}
-		
-		$this->currency = $currency instanceof CurrencyEnum ? $currency : CurrencyEnum::from($currency);
+        if($currency === null)
+        {
+            $currency = RUR::class;
+        }
+
+        if(is_string($currency) && class_exists($currency))
+        {
+            $instance = new $currency();
+
+            if($instance instanceof CurrencyInterface)
+            {
+                $this->currency = $instance;
+                return;
+            }
+        }
+
+        if($currency instanceof CurrencyInterface)
+        {
+            $this->currency = $currency;
+            return;
+        }
+
+        if($currency instanceof self)
+        {
+            $this->currency = $currency->getCurrency();
+            return;
+        }
+
+        /** @var CurrencyInterface $declare */
+        foreach(self::getDeclared() as $declare)
+        {
+            if($declare::equals($currency))
+            {
+                $this->currency = new $declare;
+                return;
+            }
+        }
+
+        throw new InvalidArgumentException(sprintf('Not found Currency %s', $currency));
 	}
 	
 	
 	public function __toString(): string
 	{
-		return $this->currency->value;
+		return $this->currency->getValue();
 	}
-	
-	
-	public function getValue(): string
-	{
-		return $this->currency->value;
-	}
-	
-	
-	public function getName(): string
-	{
-		return $this->currency->name;
-	}
-	
-	
-	public function getCurrency() : CurrencyEnum
-	{
-		return $this->currency;
-	}
-	
-	
-	public static function cases() : array
-	{
-		$case = null;
-		
-		foreach(CurrencyEnum::cases() as $local)
-		{
-			$case[] = new self($local);
-		}
-		
-		return $case;
-	}
-	
+
+    public function getCurrency() : CurrencyInterface
+    {
+        return $this->currency;
+    }
+
+    public function getCurrencyValue(): string
+    {
+        return $this->currency->getValue();
+    }
+
+
+    public static function cases(): array
+    {
+        $case = [];
+
+        foreach(self::getDeclared() as $declared)
+        {
+            /** @var CurrencyInterface $declared */
+            $class = new $declared;
+            $case[$class::sort()] = new self($class);
+        }
+
+        return $case;
+    }
+
+    public static function getDeclared(): array
+    {
+        return array_filter(
+            get_declared_classes(),
+            static function($className) {
+                return in_array(CurrencyInterface::class, class_implements($className), true);
+            }
+        );
+    }
+
+
+    public function equals(mixed $status): bool
+    {
+        $status = new self($status);
+
+        return $this->getCurrencyValue() === $status->getCurrencyValue();
+    }
+
 }

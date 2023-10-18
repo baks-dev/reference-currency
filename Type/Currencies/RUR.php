@@ -21,34 +21,33 @@
  *  THE SOFTWARE.
  */
 
-namespace BaksDev\Reference\Currency\Type;
+declare(strict_types=1);
 
-use Doctrine\DBAL\Platforms\AbstractPlatform;
-use Doctrine\DBAL\Types\StringType;
+namespace BaksDev\Reference\Currency\Type\Currencies;
 
-final class CurrencyType extends StringType
+use BaksDev\Reference\Currency\Type\Currencies\Collection\CurrencyInterface;
+use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
+
+#[AutoconfigureTag('baks.currency')]
+final class RUR implements CurrencyInterface
 {
-	public function convertToDatabaseValue($value, AbstractPlatform $platform): mixed
-	{
-		return (string) $value;
-	}
-	
-	
-	public function convertToPHPValue($value, AbstractPlatform $platform): mixed
-	{
-		return new Currency($value);
-	}
-	
-	
-	public function getName(): string
-	{
-		return Currency::TYPE;
-	}
-	
-	
-	public function requiresSQLCommentHint(AbstractPlatform $platform) : bool
-	{
-		return true;
-	}
+    public const STATUS = 'rur';
 
+    public function getValue(): string
+    {
+        return self::STATUS;
+    }
+
+    /**
+     * Сортировка (чем меньше число - тем первым в итерации будет значение)
+     */
+    public static function sort(): int
+    {
+        return 1;
+    }
+
+    public static function equals(string $status): bool
+    {
+        return self::STATUS === $status;
+    }
 }

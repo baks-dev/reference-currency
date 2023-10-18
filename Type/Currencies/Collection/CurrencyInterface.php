@@ -21,34 +21,26 @@
  *  THE SOFTWARE.
  */
 
-namespace BaksDev\Reference\Currency\Type;
+namespace BaksDev\Reference\Currency\Type\Currencies\Collection;
 
-use Doctrine\DBAL\Platforms\AbstractPlatform;
-use Doctrine\DBAL\Types\StringType;
+use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
 
-final class CurrencyType extends StringType
+#[AutoconfigureTag('baks.currency')]
+interface CurrencyInterface
 {
-	public function convertToDatabaseValue($value, AbstractPlatform $platform): mixed
-	{
-		return (string) $value;
-	}
-	
-	
-	public function convertToPHPValue($value, AbstractPlatform $platform): mixed
-	{
-		return new Currency($value);
-	}
-	
-	
-	public function getName(): string
-	{
-		return Currency::TYPE;
-	}
-	
-	
-	public function requiresSQLCommentHint(AbstractPlatform $platform) : bool
-	{
-		return true;
-	}
+    /**
+     * Возвращает значение (value)
+     */
+    public function getValue(): string;
 
+    /**
+     * Сортировка (чем меньше число - тем первым в итерации будет значение)
+     */
+    public static function sort(): int;
+
+
+    /**
+     * Проверяет, относится ли статус к данному объекту
+     */
+    public static function equals(string $status): bool;
 }

@@ -21,34 +21,35 @@
  *  THE SOFTWARE.
  */
 
-namespace BaksDev\Reference\Currency\Type;
+declare(strict_types=1);
 
-use Doctrine\DBAL\Platforms\AbstractPlatform;
-use Doctrine\DBAL\Types\StringType;
+namespace BaksDev\Reference\Currency\Type\Currencies\Collection;
 
-final class CurrencyType extends StringType
+use Symfony\Component\DependencyInjection\Attribute\TaggedIterator;
+
+final class CurrencyCollection
 {
-	public function convertToDatabaseValue($value, AbstractPlatform $platform): mixed
-	{
-		return (string) $value;
-	}
-	
-	
-	public function convertToPHPValue($value, AbstractPlatform $platform): mixed
-	{
-		return new Currency($value);
-	}
-	
-	
-	public function getName(): string
-	{
-		return Currency::TYPE;
-	}
-	
-	
-	public function requiresSQLCommentHint(AbstractPlatform $platform) : bool
-	{
-		return true;
-	}
+    private iterable $status;
 
+    public function __construct(
+        #[TaggedIterator('baks.currency', defaultPriorityMethod: 'sort')] iterable $status,
+    )
+    {
+        $this->status = $status;
+    }
+
+    /** Возвращает массив из значений */
+    public function cases(): array
+    {
+        $case = null;
+
+        foreach($this->status as $key => $status)
+        {
+            $case[$status::sort().$key] = new $status();
+        }
+
+        ksort($case);
+
+        return $case;
+    }
 }

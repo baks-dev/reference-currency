@@ -21,34 +21,21 @@
  *  THE SOFTWARE.
  */
 
-namespace BaksDev\Reference\Currency\Type;
+namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
-use Doctrine\DBAL\Platforms\AbstractPlatform;
-use Doctrine\DBAL\Types\StringType;
+return static function(ContainerConfigurator $configurator) {
 
-final class CurrencyType extends StringType
-{
-	public function convertToDatabaseValue($value, AbstractPlatform $platform): mixed
-	{
-		return (string) $value;
-	}
-	
-	
-	public function convertToPHPValue($value, AbstractPlatform $platform): mixed
-	{
-		return new Currency($value);
-	}
-	
-	
-	public function getName(): string
-	{
-		return Currency::TYPE;
-	}
-	
-	
-	public function requiresSQLCommentHint(AbstractPlatform $platform) : bool
-	{
-		return true;
-	}
+    $services = $configurator->services()
+        ->defaults()
+        ->autowire()
+        ->autoconfigure();
 
-}
+    $NAMESPACE = 'BaksDev\Reference\Currency\\';
+
+    $MODULE = substr(__DIR__, 0, strpos(__DIR__, "Resources"));
+
+    $services->load($NAMESPACE, $MODULE)
+        ->exclude($MODULE.'{Entity,Resources,Type,*DTO.php,*Message.php}');
+
+    $services->load($NAMESPACE.'Type\Currencies\\', $MODULE.'Type/Currencies');
+};
