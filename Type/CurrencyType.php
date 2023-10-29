@@ -33,10 +33,9 @@ final class CurrencyType extends StringType
 		return (string) $value;
 	}
 	
-	
 	public function convertToPHPValue($value, AbstractPlatform $platform): mixed
 	{
-		return new Currency($value);
+        return !empty($value) ? new Currency($value) : null;
 	}
 	
 	
