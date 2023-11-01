@@ -14,4 +14,3 @@ $ composer require baks-dev/reference-currency
 
 The MIT License (MIT). Обратитесь к [Файлу лицензии](LICENSE.md) за дополнительной информацией.
 
-
