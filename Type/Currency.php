@@ -31,6 +31,9 @@ use InvalidArgumentException;
 final class Currency
 {
 	public const TYPE = 'currency_type';
+
+	public const TEST = RUR::class;
+
 	
 	private CurrencyInterface $currency;
 
