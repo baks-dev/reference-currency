@@ -19,10 +19,7 @@
     }
   ],
   "require": {
-    "php": ">=8.1",
-    "symfony/twig-pack": "^1.0",
-    "symfony/orm-pack": "^2.3",
-    "baks-dev/reference-money": "^6.2"
+    "php": ">=8.2"
   },
   "require-dev": {
     "roave/security-advisories": "dev-latest"
