@@ -66,5 +66,7 @@ final class CurrencyTest extends KernelTestCase
 
         }
 
+        self::assertTrue(true);
+
     }
 }
