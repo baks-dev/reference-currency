@@ -42,5 +42,5 @@ interface CurrencyInterface
     /**
      * Проверяет, относится ли статус к данному объекту
      */
-    public static function equals(string $status): bool;
+    public static function equals(string $currency): bool;
 }

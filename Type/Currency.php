@@ -96,6 +96,11 @@ final class Currency
         return $this->currency->getValue();
     }
 
+    public function getCurrencyValueUpper(): string
+    {
+        return mb_strtoupper($this->currency->getValue());
+    }
+
 
     public static function cases(): array
     {

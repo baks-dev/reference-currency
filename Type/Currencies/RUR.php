@@ -31,11 +31,11 @@ use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
 #[AutoconfigureTag('baks.currency')]
 final class RUR implements CurrencyInterface
 {
-    public const STATUS = 'rur';
+    public const CURRENCY = 'rur';
 
     public function getValue(): string
     {
-        return self::STATUS;
+        return self::CURRENCY;
     }
 
     /**
@@ -46,8 +46,10 @@ final class RUR implements CurrencyInterface
         return 1;
     }
 
-    public static function equals(string $status): bool
+    public static function equals(string $currency): bool
     {
-        return self::STATUS === $status;
+        $currency = strtolower($currency);
+
+        return in_array($currency, [self::CURRENCY, 'руб']);
     }
 }
