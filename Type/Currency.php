@@ -77,7 +77,8 @@ final class Currency
             }
         }
 
-        throw new InvalidArgumentException(sprintf('Not found Currency %s', $currency));
+        /** По умолчанию присваиваем RUR */
+        $this->currency = new RUR();
 	}
 	
 	

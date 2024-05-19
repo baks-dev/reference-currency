@@ -26,6 +26,7 @@ declare(strict_types=1);
 namespace BaksDev\Reference\Currency\Type\Tests;
 
 use BaksDev\Reference\Currency\Type\Currencies\Collection\CurrencyCollection;
+use BaksDev\Reference\Currency\Type\Currencies\RUR;
 use BaksDev\Reference\Currency\Type\Currency;
 use BaksDev\Reference\Currency\Type\CurrencyType;
 use BaksDev\Wildberries\Orders\Type\WildberriesStatus\Status\Collection\WildberriesStatusInterface;
@@ -66,7 +67,8 @@ final class CurrencyTest extends KernelTestCase
 
         }
 
-        self::assertTrue(true);
+        $Currency = new Currency();
+        self::assertTrue($Currency->equals(RUR::class));
 
     }
 }
