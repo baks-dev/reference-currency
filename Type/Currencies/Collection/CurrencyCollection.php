@@ -25,14 +25,14 @@ declare(strict_types=1);
 
 namespace BaksDev\Reference\Currency\Type\Currencies\Collection;
 
-use Symfony\Component\DependencyInjection\Attribute\TaggedIterator;
+use Symfony\Component\DependencyInjection\Attribute\AutowireIterator;
 
 final class CurrencyCollection
 {
     private iterable $status;
 
     public function __construct(
-        #[TaggedIterator('baks.currency', defaultPriorityMethod: 'sort')] iterable $status,
+        #[AutowireIterator('baks.currency', defaultPriorityMethod: 'sort')] iterable $status,
     )
     {
         $this->status = $status;
