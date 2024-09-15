@@ -1,6 +1,6 @@
 <?php
 /*
- *  Copyright 2023.  Baks.dev <admin@baks.dev>
+ *  Copyright 2024.  Baks.dev <admin@baks.dev>
  *
  *  Permission is hereby granted, free of charge, to any person obtaining a copy
  *  of this software and associated documentation files (the "Software"), to deal
@@ -23,11 +23,11 @@
 
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
-use BaksDev\Reference\Currency\Type\Currency;
+use BaksDev\Reference\Currency\BaksDevReferenceCurrencyBundle;
+use Symfony\Config\FrameworkConfig;
 
-use BaksDev\Reference\Currency\Type\CurrencyType;
-use Symfony\Config\DoctrineConfig;
-
-return static function(DoctrineConfig $doctrine) {
-	$doctrine->dbal()->type(Currency::TYPE)->class(CurrencyType::class);
+return static function (FrameworkConfig $config) {
+    $config
+        ->translator()
+        ->paths([BaksDevReferenceCurrencyBundle::PATH.implode(DIRECTORY_SEPARATOR, ['Resources', 'translations', ''])]); // .'Resources/translations/']);
 };
