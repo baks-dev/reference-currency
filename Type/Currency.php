@@ -25,20 +25,19 @@ namespace BaksDev\Reference\Currency\Type;
 
 use BaksDev\Reference\Currency\Type\Currencies\Collection\CurrencyInterface;
 use BaksDev\Reference\Currency\Type\Currencies\RUR;
-use InvalidArgumentException;
 
 /** Валюта */
 final class Currency
 {
-	public const TYPE = 'currency_type';
+    public const TYPE = 'currency_type';
 
-	public const TEST = RUR::class;
+    public const TEST = RUR::class;
 
-	
-	private CurrencyInterface $currency;
 
-	public function __construct(CurrencyInterface|self|string|null $currency = null)
-	{
+    private CurrencyInterface $currency;
+
+    public function __construct(CurrencyInterface|self|string|null $currency = null)
+    {
         if($currency === null)
         {
             $currency = RUR::class;
@@ -72,22 +71,22 @@ final class Currency
         {
             if($declare::equals($currency))
             {
-                $this->currency = new $declare;
+                $this->currency = new $declare();
                 return;
             }
         }
 
         /** По умолчанию присваиваем RUR */
         $this->currency = new RUR();
-	}
-	
-	
-	public function __toString(): string
-	{
-		return $this->currency->getValue();
-	}
+    }
 
-    public function getCurrency() : CurrencyInterface
+
+    public function __toString(): string
+    {
+        return $this->currency->getValue();
+    }
+
+    public function getCurrency(): CurrencyInterface
     {
         return $this->currency;
     }
@@ -110,7 +109,7 @@ final class Currency
         foreach(self::getDeclared() as $declared)
         {
             /** @var CurrencyInterface $declared */
-            $class = new $declared;
+            $class = new $declared();
             $case[$class::sort()] = new self($class);
         }
 
@@ -121,7 +120,7 @@ final class Currency
     {
         return array_filter(
             get_declared_classes(),
-            static function($className) {
+            static function ($className) {
                 return in_array(CurrencyInterface::class, class_implements($className), true);
             }
         );
