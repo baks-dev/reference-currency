@@ -38,9 +38,9 @@ final class Currency
 
     public function __construct(CurrencyInterface|self|string|null $currency = null)
     {
-        if($currency === null)
+        if($currency === null || in_array($currency, ['RUB', 'rub']) )
         {
-            $currency = RUR::class;
+            $currency = new RUR();
         }
 
         if(is_string($currency) && class_exists($currency))
