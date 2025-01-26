@@ -1,6 +1,6 @@
 <?php
 /*
- *  Copyright 2024.  Baks.dev <admin@baks.dev>
+ *  Copyright 2025.  Baks.dev <admin@baks.dev>
  *  
  *  Permission is hereby granted, free of charge, to any person obtaining a copy
  *  of this software and associated documentation files (the "Software"), to deal
@@ -36,9 +36,9 @@ final class Currency
 
     private CurrencyInterface $currency;
 
-    public function __construct(CurrencyInterface|self|string|null $currency = null)
+    public function __construct(CurrencyInterface|self|string|int|null $currency = null)
     {
-        if($currency === null || in_array($currency, ['RUB', 'rub']) )
+        if($currency === null || in_array($currency, ['RUB', 'rub']))
         {
             $currency = new RUR();
         }
@@ -120,7 +120,7 @@ final class Currency
     {
         return array_filter(
             get_declared_classes(),
-            static function ($className) {
+            static function($className) {
                 return in_array(CurrencyInterface::class, class_implements($className), true);
             }
         );
