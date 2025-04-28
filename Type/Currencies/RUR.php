@@ -60,6 +60,6 @@ final class RUR implements CurrencyInterface
             $currency = strtolower($currency);
         }
 
-        return in_array($currency, [self::CURRENCY, self::ISO4217, 'руб'], true);
+        return in_array($currency, [self::CURRENCY, self::ISO4217, 'руб', 'rur'], true);
     }
 }
