@@ -31,7 +31,7 @@ use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
 #[AutoconfigureTag('baks.currency')]
 final class RUR implements CurrencyInterface
 {
-    public const string CURRENCY = 'rur';
+    public const string CURRENCY = 'rub';
 
     public const int ISO4217 = 643;
 
