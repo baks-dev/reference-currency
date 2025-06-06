@@ -38,14 +38,10 @@ final class Currency
 
     public function __construct(CurrencyInterface|self|string|int|null $currency = null)
     {
-        /*if($currency === null || in_array($currency, ['RUB', 'rub']))
+        if(empty($currency) || in_array($currency, ['RUR', 'rur']))
         {
-            $currency = new RUR();
-        }*/
-
-        if($currency === null || in_array($currency, ['RUR', 'rur']))
-        {
-            $currency = new RUR();
+            $this->currency = new RUR();
+            return;
         }
 
         if(is_string($currency) && class_exists($currency))
