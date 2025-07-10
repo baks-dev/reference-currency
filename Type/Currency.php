@@ -111,8 +111,10 @@ final class Currency
         {
             /** @var CurrencyInterface $declared */
             $class = new $declared();
-            $case[$class::sort()] = new self($class);
+            $case[$class::sort().$class::CURRENCY] = new self($class);
         }
+
+        ksort($case);
 
         return $case;
     }
@@ -122,6 +124,14 @@ final class Currency
         return array_filter(
             get_declared_classes(),
             static function($className) {
+
+                $implements = class_implements($className);
+
+                if(empty($implements))
+                {
+                    return false;
+                }
+
                 return in_array(CurrencyInterface::class, class_implements($className), true);
             }
         );
