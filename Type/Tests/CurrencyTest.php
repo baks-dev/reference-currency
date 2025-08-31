@@ -31,13 +31,12 @@ use BaksDev\Reference\Currency\Type\Currency;
 use BaksDev\Reference\Currency\Type\CurrencyType;
 use BaksDev\Wildberries\Orders\Type\WildberriesStatus\Status\Collection\WildberriesStatusInterface;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
+use PHPUnit\Framework\Attributes\Group;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\DependencyInjection\Attribute\When;
 
-/**
- * @group reference-currency
- */
 #[When(env: 'test')]
+#[Group('reference-currency')]
 final class CurrencyTest extends KernelTestCase
 {
     public function testUseCase(): void
@@ -45,7 +44,7 @@ final class CurrencyTest extends KernelTestCase
         /** @var CurrencyCollection $CurrencyCollection */
         $CurrencyCollection = self::getContainer()->get(CurrencyCollection::class);
 
-        /** @var WildberriesStatusInterface $case */
+        /** @var CurrencyCollection $case */
         foreach($CurrencyCollection->cases() as $case)
         {
             $Currency = new Currency($case->getValue());
