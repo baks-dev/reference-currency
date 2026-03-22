@@ -29,6 +29,16 @@ use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
 interface CurrencyInterface
 {
     /**
+     * Сортировка (чем меньше число - тем первым в итерации будет значение)
+     */
+    public static function sort(): int;
+
+    /**
+     * Проверяет, относится ли статус к данному объекту
+     */
+    public static function equals(string|int $currency): bool;
+
+    /**
      * Возвращает значение (value)
      */
     public function getValue(): string;
@@ -37,15 +47,4 @@ interface CurrencyInterface
      * Возвращает значение в формате ISO 4217
      */
     public function getISO4217(): int;
-
-    /**
-     * Сортировка (чем меньше число - тем первым в итерации будет значение)
-     */
-    public static function sort(): int;
-
-
-    /**
-     * Проверяет, относится ли статус к данному объекту
-     */
-    public static function equals(string|int $currency): bool;
 }

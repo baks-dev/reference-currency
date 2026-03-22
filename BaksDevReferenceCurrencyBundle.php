@@ -36,7 +36,7 @@ class BaksDevReferenceCurrencyBundle extends AbstractBundle
 
     public const string PATH = __DIR__.DIRECTORY_SEPARATOR;
 
-//    public function loadExtension(array $config, ContainerConfigurator $container, ContainerBuilder $builder): void
+    //    public function loadExtension(array $config, ContainerConfigurator $container, ContainerBuilder $builder): void
     //    {
     //        $services = $container->services()
     //            ->defaults()

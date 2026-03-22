@@ -29,27 +29,27 @@ use Doctrine\DBAL\Types\Type;
 
 final class CurrencyType extends Type
 {
-	public function convertToDatabaseValue($value, AbstractPlatform $platform): string
-	{
-		return (string) $value;
-	}
-	
-	public function convertToPHPValue($value, AbstractPlatform $platform): ?Currency
-	{
+    public function convertToDatabaseValue($value, AbstractPlatform $platform): string
+    {
+        return (string) $value;
+    }
+
+    public function convertToPHPValue($value, AbstractPlatform $platform): ?Currency
+    {
         return !empty($value) ? new Currency($value) : null;
-	}
-	
-	
-	public function getName(): string
-	{
-		return Currency::TYPE;
-	}
-	
-	
-	public function requiresSQLCommentHint(AbstractPlatform $platform) : bool
-	{
-		return true;
-	}
+    }
+
+
+    public function getName(): string
+    {
+        return Currency::TYPE;
+    }
+
+
+    public function requiresSQLCommentHint(AbstractPlatform $platform): bool
+    {
+        return true;
+    }
 
     public function getSQLDeclaration(array $column, AbstractPlatform $platform): string
     {

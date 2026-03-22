@@ -35,16 +35,6 @@ final class RUR implements CurrencyInterface
 
     public const int ISO4217 = 643;
 
-    public function getValue(): string
-    {
-        return self::CURRENCY;
-    }
-
-    public function getISO4217(): int
-    {
-        return self::ISO4217;
-    }
-
     /**
      * Сортировка (чем меньше число - тем первым в итерации будет значение)
      */
@@ -61,5 +51,15 @@ final class RUR implements CurrencyInterface
         }
 
         return in_array($currency, [self::CURRENCY, self::ISO4217, (string) self::ISO4217, 'руб', 'rur'], true);
+    }
+
+    public function getValue(): string
+    {
+        return self::CURRENCY;
+    }
+
+    public function getISO4217(): int
+    {
+        return self::ISO4217;
     }
 }

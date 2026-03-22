@@ -30,24 +30,24 @@ use Twig\TwigFunction;
 /** Класс конвертирует число из одной валюты в другую */
 final class CurrencyExtension extends AbstractExtension
 {
-	public function getFunctions() : array
-	{
-		return [
-			new TwigFunction('currency', [$this, 'currency'], ['needs_environment' => true]),
-		];
-	}
-	
-	
-	public function currency(Environment $twig, string $money, string $from = 'RUR', string $to = 'RUR'): string
-	{
-		/** TODO: конвертируем валюту */
-		
-		if($from === $to )
-		{
-		
-		}
-		
-		return ($money * 1 / 100);
-	}
-	
+    public function getFunctions(): array
+    {
+        return [
+            new TwigFunction('currency', [$this, 'currency'], ['needs_environment' => true]),
+        ];
+    }
+
+
+    public function currency(Environment $twig, string $money, string $from = 'RUR', string $to = 'RUR'): string
+    {
+        /** TODO: конвертируем валюту */
+
+        if($from === $to)
+        {
+
+        }
+
+        return ($money * 1 / 100);
+    }
+
 }

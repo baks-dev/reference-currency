@@ -81,27 +81,40 @@ final class Currency
         $this->currency = new RUR();
     }
 
-
-    public function __toString(): string
-    {
-        return $this->currency->getValue();
-    }
-
     public function getCurrency(): CurrencyInterface
     {
         return $this->currency;
+    }
+
+    public static function getDeclared(): array
+    {
+        return array_filter(
+            get_declared_classes(),
+            static function($className) {
+
+                $implements = class_implements($className);
+
+                if(empty($implements))
+                {
+                    return false;
+                }
+
+                return in_array(CurrencyInterface::class, class_implements($className), true);
+            },
+        );
+    }
+
+    public function equals(mixed $status): bool
+    {
+        $status = new self($status);
+
+        return $this->getCurrencyValue() === $status->getCurrencyValue();
     }
 
     public function getCurrencyValue(): string
     {
         return $this->currency->getValue();
     }
-
-    public function getCurrencyValueUpper(): string
-    {
-        return mb_strtoupper($this->currency->getValue());
-    }
-
 
     public static function cases(): array
     {
@@ -119,30 +132,14 @@ final class Currency
         return $case;
     }
 
-    public static function getDeclared(): array
+    public function __toString(): string
     {
-        return array_filter(
-            get_declared_classes(),
-            static function($className) {
-
-                $implements = class_implements($className);
-
-                if(empty($implements))
-                {
-                    return false;
-                }
-
-                return in_array(CurrencyInterface::class, class_implements($className), true);
-            }
-        );
+        return $this->currency->getValue();
     }
 
-
-    public function equals(mixed $status): bool
+    public function getCurrencyValueUpper(): string
     {
-        $status = new self($status);
-
-        return $this->getCurrencyValue() === $status->getCurrencyValue();
+        return mb_strtoupper($this->currency->getValue());
     }
 
 }
